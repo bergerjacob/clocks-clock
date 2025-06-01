@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P5.js Clock Widget</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <style>
+        /* Ensure the sketch takes up the whole iframe body without margins */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide scrollbars if canvas is exact size */
+            /* Set to transparent if you want the parent page's background to show *around* the canvas.
+               If the p5 sketch uses clear() instead of background(), this will make the canvas itself see-through.
+               If your p5 sketch has its own background() call (like the grey one), this body background won't be visible behind the canvas. */
+            background-color: transparent;
+        }
+        canvas {
+            display: block; /* Removes any baseline spacing */
+        }
+    </style>
+</head>
+<body>
+    <script src="sketch.js"></script>
+</body>
+</html>
