@@ -68,7 +68,9 @@ function setup() {
 
   createCanvas(canvasWidth, desiredHeight);
 
-  parent.postMessage({ clockWidth: canvasWidth }, 'https://bergerjacob.github.io');
+  const targetOrigin = window.location.ancestorOrigins.length ? window.location.ancestorOrigins[0] : '*';
+  parent.postMessage({ clockWidth: canvasWidth }, targetOrigin);
+  console.log(`Attempting to send width ${canvasWidth} to origin: ${targetOrigin}`);
 
   angleMode(DEGREES);
   frameRate(60);
