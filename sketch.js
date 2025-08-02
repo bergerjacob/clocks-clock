@@ -137,8 +137,6 @@ function updateGoalStates() {
   ];
 
   if (h12 < 10) { timeChars[0] = 'space'; }
-  if (m < 10) { timeChars[3] = 'space'; }
-  if (s < 10) { timeChars[6] = 'space'; }
 
   const next_s = (s + 1) % 60;
   const next_m = (next_s === 0) ? (m + 1) % 60 : m;
