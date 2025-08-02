@@ -16,25 +16,37 @@ let config = {
 
 // --- Dynamic Style & Layout Variables ---
 let CLOCK_DIAMETER, SPACING;
+let CHAR_GRID_WIDTH, CHAR_GRID_HEIGHT;
 
 // --- Static Layout Constants ---
-const CHAR_GRID_WIDTH = 3;
-const CHAR_GRID_HEIGHT = 5;
-const NUM_CHAR_SLOTS = 11; // HH:MM:SS AM/PM
+const NUM_CHAR_SLOTS = 10; // HH:MM:SS AM/PM
 
 // --- Animation Constants ---
 const ANIMATION_DURATION = 500; // in ms
 
 function preload() {
-  encodings = loadJSON('encodings.json');
+  const urlParams = new URLSearchParams(window.location.search);
+  const mode = urlParams.get('mode') || '5x3'; // Default to 5x3
+  const encodingFile = mode === '3x2' ? 'encodings-3x2.json' : 'encodings-5x3.json';
+  encodings = loadJSON(encodingFile);
 }
 
 function setup() {
   const urlParams = new URLSearchParams(window.location.search);
+  const mode = urlParams.get('mode') || '5x3';
+
+  // --- Grid Configuration ---
+  if (mode === '3x2') {
+    CHAR_GRID_WIDTH = 2;
+    CHAR_GRID_HEIGHT = 3;
+  } else { // Default to 5x3
+    CHAR_GRID_WIDTH = 3;
+    CHAR_GRID_HEIGHT = 5;
+  }
 
   // --- Size Configuration ---
   const desiredHeight = parseInt(urlParams.get('height')) || 230;
-  const SPACING_TO_DIAMETER_RATIO = 0.375;
+  const SPACING_TO_DIAMETER_RATIO = urlParams.get('digitSpacing') || 0.375;
   const TOTAL_UNITS_IN_HEIGHT = CHAR_GRID_HEIGHT + (2 * SPACING_TO_DIAMETER_RATIO);
   CLOCK_DIAMETER = desiredHeight / TOTAL_UNITS_IN_HEIGHT;
   SPACING = CLOCK_DIAMETER * SPACING_TO_DIAMETER_RATIO;
@@ -73,7 +85,7 @@ function setup() {
 
 function draw() {
   if (config.transparentBg) {
-    clear(); // Use clear() for a transparent background
+    clear(); // clear() for a transparent background
   } else {
     background(config.bgColor); // Otherwise, use the specified background color
   }
@@ -120,7 +132,7 @@ function updateGoalStates() {
   const timeChars = [
     nf(h12, 2)[0], nf(h12, 2)[1], 'colon',
     nf(m, 2)[0], nf(m, 2)[1], 'colon',
-    nf(s, 2)[0], nf(s, 2)[1], 'space',
+    nf(s, 2)[0], nf(s, 2)[1],
     ampmChar, 'M'
   ];
 
