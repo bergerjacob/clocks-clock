@@ -67,6 +67,9 @@ function setup() {
 
 
   createCanvas(canvasWidth, desiredHeight);
+
+  parent.postMessage({ clockWidth: canvasWidth }, 'https://bergerjacob.github.io');
+
   angleMode(DEGREES);
   frameRate(60);
 
