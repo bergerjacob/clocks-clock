@@ -10,7 +10,8 @@ let config = {
   faceColor1: '#f47a9e',
   faceColor2: '#ed225d',
   handColor: '#ffffff',
-  inactiveAlpha: 60
+  inactiveAlpha: 60,
+  transparentBg: false
 };
 
 // --- Dynamic Style & Layout Variables ---
@@ -50,6 +51,8 @@ function setup() {
   config.faceColor2 = getColorParam('faceColor2', config.faceColor2);
   config.handColor = getColorParam('handColor', config.handColor);
   config.inactiveAlpha = parseInt(urlParams.get('inactiveAlpha')) || config.inactiveAlpha;
+  config.transparentBg = urlParams.get('transparentBg') === 'true';
+
 
   createCanvas(canvasWidth, desiredHeight);
   angleMode(DEGREES);
@@ -69,7 +72,11 @@ function setup() {
 }
 
 function draw() {
-  background(config.bgColor);
+  if (config.transparentBg) {
+    clear(); // Use clear() for a transparent background
+  } else {
+    background(config.bgColor); // Otherwise, use the specified background color
+  }
 
   let s = second();
   if (s !== lastSecond) {
