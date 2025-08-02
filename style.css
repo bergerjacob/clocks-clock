@@ -1,23 +1,11 @@
+/* style.css for the clock widget */
 html, body {
-  margin: 0;
-  padding: 0;
-  background-color: #DCDCDC; /* A light grey background for the page, matching your sketch's background aesthetic */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Make body take full viewport height */
-  overflow: hidden; /* Prevents scrollbars if canvas is flush with window edges */
-  font-family: sans-serif; /* Basic font styling */
+    margin: 0;
+      padding: 0;
+      overflow: hidden; /* Hide scrollbars if canvas is exact size */
+      background-color: transparent; /* Allows parent page background to show through */
 }
 
 canvas {
-  display: block; /* Removes any extra space below the canvas often added by browsers */
-  /* Optional: Add a border to easily see the canvas boundaries during development */
-  /* border: 1px solid black; */
-}
-
-main {
-  /* The main tag is in your HTML. If you intend to place the canvas inside it,
-     you might add styling here. p5.js by default appends the canvas to the body.
-     To put the canvas in main, you'd add canvas.parent('main'); in setup(). */
+    display: block; /* Removes any baseline spacing */
 }
